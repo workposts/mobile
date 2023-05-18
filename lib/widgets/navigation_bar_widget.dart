@@ -14,7 +14,7 @@ class NavigationBarWidget extends StatelessWidget {
       decoration: const BoxDecoration(
           color: Configuration.primaryDarkColor,
           border: Border(
-              top: BorderSide(color: Configuration.accentColor, width: 2))),
+              top: BorderSide(color: Configuration.accentColor, width: 1))),
       child: Center(
         child: SizedBox(
           width: 200,
