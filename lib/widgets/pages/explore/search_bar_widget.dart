@@ -33,6 +33,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           child: TextField(
             controller: _controller,
             focusNode: _focus,
+            enableSuggestions: true,
             cursorColor: Configuration.primaryLightColor,
             style: const TextStyle(
                 color: Configuration.primaryLightColor,
