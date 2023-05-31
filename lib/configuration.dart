@@ -7,4 +7,5 @@ class Configuration {
   static const Color secondaryDarkColor = Color(0xFF030303);
   static const Color tertiaryDarkColor = Color(0xFF4E4E4E);
   static const Color quaternaryDarkColor = Color(0xFF989898);
+  static const String repository_source = 'local';
 }

@@ -12,6 +12,40 @@ class WorkpostPreviewLoadingWidget extends StatefulWidget {
 class _WorkpostPreviewLoadingWidgetState
     extends State<WorkpostPreviewLoadingWidget>
     with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Color?> animation;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+        duration: const Duration(seconds: 1), vsync: this);
+    animation = ColorTween(
+      begin: Colors.grey,
+      end: Configuration.primaryLightColor,
+    ).animate(_controller);
+
+    _controller.addListener(() {
+      setState(() {});
+    });
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        _controller.forward();
+      }
+    });
+
+    _controller.forward();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -30,31 +64,25 @@ class _WorkpostPreviewLoadingWidgetState
                     child: Container(
                         height: 24,
                         width: width * 0.3,
-                        color: Configuration.primaryLightColor)),
+                        color: animation.value)),
                 const SizedBox(height: 10),
                 ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                        height: 20,
-                        width: width * 0.5,
-                        color: Configuration.primaryLightColor))
+                        height: 20, width: width * 0.5, color: animation.value))
               ],
             ),
             ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
-                    height: 20,
-                    width: width * 0.1,
-                    color: Configuration.primaryLightColor))
+                    height: 20, width: width * 0.1, color: animation.value))
           ],
         ),
         const SizedBox(height: 10),
         ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Container(
-                height: width * 1.05,
-                width: width,
-                color: Configuration.primaryLightColor)),
+                height: width * 1.05, width: width, color: animation.value)),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,22 +96,18 @@ class _WorkpostPreviewLoadingWidgetState
                     child: Container(
                         height: 20,
                         width: width * 0.15,
-                        color: Configuration.primaryLightColor)),
+                        color: animation.value)),
                 const SizedBox(height: 10),
                 ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                        height: 20,
-                        width: width * 0.3,
-                        color: Configuration.primaryLightColor))
+                        height: 20, width: width * 0.3, color: animation.value))
               ],
             ),
             ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                    height: 40,
-                    width: width * 0.3,
-                    color: Configuration.primaryLightColor))
+                    height: 40, width: width * 0.3, color: animation.value))
           ],
         )
       ],
